@@ -1,0 +1,47 @@
+﻿@using Obilet_CaseStudy.Models.Request
+@using Obilet_CaseStudy.Models.Response
+@model BusJourneysRequest
+
+@{ 
+    Layout = "_Layout";
+    ViewData["Title"] = "Index"; 
+}
+
+<form action="Home/JourneyPost" method="post">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header">
+                    Obilet.com
+                </div>
+                <div class="card-body">
+
+                    <label>Nereden : </label>
+                    <select class="form-control" id="OriginId" name="OriginId">
+                        @foreach (var item in (List<GetBusLocationsResponse>)TempData["GetBusLocationsResponse"])
+                        {
+            <option value="@item.Id">@item.Name</option>}
+                    </select>
+
+                    <hr />
+
+                    <label>Nereye : </label>
+                    <select class="form-control" id="DestinationId" name="DestinationId">
+                        @foreach (var item in (List<GetBusLocationsResponse>)TempData["GetBusLocationsResponse"])
+                        {
+            <option value="@item.Id">@item.Name</option>}
+                    </select>
+
+                    <hr />
+
+                    <label>Tarih : </label>
+                    <input class="form-control" type="text" id="DepartureDate" name="DepartureDate">
+
+                    <hr />
+
+                    <button type="submit" class="btn btn-primary">Bilet Bul</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
