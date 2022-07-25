@@ -2,9 +2,9 @@
 @using Obilet_CaseStudy.Models.Response
 @model BusJourneysRequest
 
-@{ 
+@{
     Layout = "_Layout";
-    ViewData["Title"] = "Index"; 
+    ViewData["Title"] = "Index";
 }
 
 <form action="Home/JourneyPost" method="post">
@@ -20,8 +20,13 @@
                     <select class="form-control" id="OriginId" name="OriginId">
                         @foreach (var item in (List<GetBusLocationsResponse>)TempData["GetBusLocationsResponse"])
                         {
-            <option value="@item.Id">@item.Name</option>}
+                            <option value="@item.Id">@item.Name</option>
+                        }
                     </select>
+
+                    <hr />
+
+                    <input type="button" class="btn btn-primary" value="Değiştir" id="swap">
 
                     <hr />
 
@@ -29,17 +34,30 @@
                     <select class="form-control" id="DestinationId" name="DestinationId">
                         @foreach (var item in (List<GetBusLocationsResponse>)TempData["GetBusLocationsResponse"])
                         {
-            <option value="@item.Id">@item.Name</option>}
+                            <option value="@item.Id">@item.Name</option>
+                        }
                     </select>
 
                     <hr />
 
                     <label>Tarih : </label>
                     <input class="form-control" type="text" id="DepartureDate" name="DepartureDate">
+                    <br />
+                    <button type="button" id="btnToday" class="btn btn-info" onclick="todayFunction()">Bugün</button>
+                    <button type="button" id="btnTomorrow" class="btn btn-info" onclick="tomorrowFunction()">Yarın</button>
 
                     <hr />
 
                     <button type="submit" class="btn btn-primary">Bilet Bul</button>
+
+                    <br />
+
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Message"]
+                        </div>
+                    }
                 </div>
             </div>
         </div>

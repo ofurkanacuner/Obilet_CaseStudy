@@ -52,7 +52,7 @@ namespace Obilet_CaseStudy.Controllers
             if(JsonConvert.DeserializeObject<BaseResponse<BusJourneysResponse>>(getBusJourneysResponse.Data).Status != "Success")
             {
                 TempData["Message"] = JsonConvert.DeserializeObject<BaseResponse<BusJourneysResponse>>(getBusJourneysResponse.Data).UserMessage;
-                return View(new List<BusJourneysResponse>());
+                return RedirectToAction("Index", new BusJourneysRequest());
             }
 
             var getBusJourneysResult = JsonConvert.DeserializeObject<BaseResponse<BusJourneysResponse>>(getBusJourneysResponse.Data).Data;

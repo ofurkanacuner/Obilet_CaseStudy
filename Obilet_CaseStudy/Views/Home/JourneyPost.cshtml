@@ -1,44 +1,39 @@
 ﻿@using Obilet_CaseStudy.Models.Response
 @model List<BusJourneysResponse>
 
-@{ Layout = "_Layout";
-    ViewData["Title"] = "List"; }
-
-@if (TempData["Message"] != null)
-{
-    <label>@TempData["Message"]</label>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "List";
 }
-else
-{
-    <div class="row">
-        <div class="col-sm-4">
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card">
+            <div class="card-header text-center">
+                @Model.FirstOrDefault().OriginLocation --> @Model.FirstOrDefault().DestinationLocation
+            </div>
+        </div>
+        @foreach (var item in Model)
+        {
+            <br />
             <div class="card">
-                <div class="card-header text-center">
-                    @Model.FirstOrDefault().OriginLocation --> @Model.FirstOrDefault().DestinationLocation
+                <div class="card-body">
+                    <label>Kalkış : </label>
+                    @item.Journey.Departure.ToShortTimeString()
+                    <label>---></label>
+                    <label>Varış : </label>
+                    @item.Journey.Arrival.ToShortTimeString()
+
+                    <hr />
+
+                    @item.Journey.Stops.FirstOrDefault().Name - @item.Journey.Stops.LastOrDefault().Name
+
+                    <hr />
+
+                    <label>Ücret : </label>
+                    @item.Journey.InternetPrice @item.Journey.Currency
                 </div>
             </div>
-            @foreach (var item in Model)
-            {
-                <br />
-                <div class="card">
-                    <div class="card-body">
-                        <label>Kalkış : </label>
-                         @item.Journey.Departure.ToShortTimeString()
-                        <label>---></label>
-                        <label>Varış : </label>
-                        @item.Journey.Arrival.ToShortTimeString()
-    
-                        <hr />
-    
-                        @item.Journey.Stops.FirstOrDefault().Name - @item.Journey.Stops.LastOrDefault().Name
-    
-                        <hr />
-    
-                        <label>Ücret : </label>
-                        @item.Journey.InternetPrice @item.Journey.Currency
-                    </div>
-                </div>
-             }
-        </div>
+        }
     </div>
-}
+</div>

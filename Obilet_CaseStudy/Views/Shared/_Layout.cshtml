@@ -13,15 +13,34 @@
     <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    <script>$(function () {
-    $("#DepartureDate").datepicker({
-                dateFormat: "dd/mm/yy",
-                setDate: new Date(),
-                minDate: 0,
-                showButtonPanel: true
-            });
-});
-    
+    <script>
+            $(function () {
+        $("#DepartureDate").datepicker({
+                    dateFormat: "dd/mm/yy",
+                    minDate: 0
+                });
+        });
+
+        $( document ).ready(function() {
+              $('#DepartureDate').datepicker('setDate', "+1d");
+
+              $('#swap').click(function () {
+                    var OriginId = $('#OriginId').val(),
+                        DestinationId = $('#DestinationId').val();
+                    $('#OriginId').val(DestinationId);
+                    $('#DestinationId').val(OriginId);
+                });
+        });
+
+        function todayFunction() {
+              $('#DepartureDate').datepicker('setDate', new Date());
+        }
+
+        function tomorrowFunction() {
+              $('#DepartureDate').datepicker('setDate', "+1d");
+        }
+
+
     </script>
 
 
